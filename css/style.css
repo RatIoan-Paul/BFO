@@ -1,0 +1,649 @@
+/* =========== Google Fonts ============ */
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
+
+/* =============== Globals ============== */
+* {
+  font-family: "Ubuntu", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --blue: #f00;
+  --white: #fff;
+  --gray: #f5f5f5;
+  --black1: #222;
+  --black2: #999;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.container {
+  position: relative;
+  width: 100%;
+}
+
+/* =============== Navigation ================ */
+.navigation {
+  position: fixed;
+  width: 300px;
+  height: 100%;
+  background: var(--blue);
+  border-left: 5px solid var(--blue);
+  transition: 0.5s;
+  overflow: hidden;
+}
+.navigation.active {
+  width: 80px;
+}
+
+.navigation ul {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.navigation ul li {
+  position: relative;
+  width: 100%;
+  list-style: none;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.navigation ul li:hover,
+.navigation ul li.hovered {
+  background-color: var(--white);
+}
+
+.navigation ul li:nth-child(1) {
+  margin-bottom: 40px;
+  pointer-events: none;
+}
+
+.navigation ul li a {
+  position: relative;
+  display: block;
+  width: 100%;
+  display: flex;
+  text-decoration: none;
+  color: var(--white);
+}
+.navigation ul li:hover a,
+.navigation ul li.hovered a {
+  color: var(--blue);
+}
+
+.navigation ul li a .icon {
+  position: relative;
+  display: block;
+  min-width: 60px;
+  height: 60px;
+  line-height: 75px;
+  text-align: center;
+}
+.navigation ul li a .icon ion-icon {
+  font-size: 1.75rem;
+}
+
+.navigation ul li a .title {
+  position: relative;
+  display: block;
+  padding: 0 10px;
+  height: 60px;
+  line-height: 60px;
+  text-align: start;
+  white-space: nowrap;
+}
+
+/* --------- curve outside ---------- */
+.navigation ul li:hover a::before,
+.navigation ul li.hovered a::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: -50px;
+  width: 50px;
+  height: 50px;
+  background-color: transparent;
+  border-radius: 50%;
+  box-shadow: 35px 35px 0 10px var(--white);
+  pointer-events: none;
+}
+.navigation ul li:hover a::after,
+.navigation ul li.hovered a::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -50px;
+  width: 50px;
+  height: 50px;
+  background-color: transparent;
+  border-radius: 50%;
+  box-shadow: 35px -35px 0 10px var(--white);
+  pointer-events: none;
+}
+
+/* ===================== Main ===================== */
+.main {
+  position: absolute;
+  width: calc(100% - 300px);
+  left: 300px;
+  min-height: 100vh;
+  background: var(--white);
+  transition: 0.5s;
+}
+.main.active {
+  width: calc(100% - 80px);
+  left: 80px;
+}
+
+.topbar {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.toggle {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.5rem;
+  cursor: pointer;
+}
+
+.search {
+  position: relative;
+  width: 400px;
+  margin: 0 10px;
+}
+
+.search label {
+  position: relative;
+  width: 100%;
+}
+
+.search label input {
+  width: 100%;
+  height: 40px;
+  border-radius: 40px;
+  padding: 5px 20px;
+  padding-left: 35px;
+  font-size: 18px;
+  outline: none;
+  border: 1px solid var(--black2);
+}
+
+.search label ion-icon {
+  position: absolute;
+  top: 0;
+  left: 10px;
+  font-size: 1.2rem;
+}
+
+.user {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.user img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Stiluri pentru butoanele Editează și Șterge */
+.btn-edit {
+  padding: 5px 10px;
+  background-color: #4CAF50; /* Culoare verde */
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-right: 10px; /* Spațiu între butoane */
+}
+
+.btn-delete {
+  padding: 5px 10px;
+  background-color: #f44336; /* Culoare roșie */
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+/* Stil pentru butonul de postare anunțuri */
+.button {
+  width: 100%; /* Se extinde pe toată lățimea container-ului său */
+  padding: 10px; /* Spatiu interior pentru a mări butonul */
+  background-color: var(--blue); /* Culoarea de fundal albastră definită în :root */
+  color: var(--white); /* Culoare text albă */
+  border: none; /* Fără bordură */
+  border-radius: 5px; /* Margini rotunjite */
+  cursor: pointer; /* Cursorul se schimbă în pointer când este deasupra butonului */
+  font-size: 16px; /* Dimensiunea fontului */
+  transition: background-color 0.3s ease; /* O tranziție pentru culoarea de fundal */
+}
+
+.textarea-square {
+  width: 1160px; /* Lungimea fixă */
+  height: 400px; /* Înălțimea fixă */
+  resize: none; /* Opțional: previne redimensionarea de către utilizator */
+}
+
+
+/* ===== Stil pentru Formularul de Filtre ===== */
+#filterForm {
+  max-width: 100%; /* Se potrivește lățimii container-ului */
+  margin: 20px auto; /* Centrare și spațiu */
+  padding: 5px;
+  background-color: var(--white);
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+#filterForm label {
+  margin: 5px 10px;
+  font-size: 14px;
+  color: var(--black1);
+}
+
+#filterForm input[type=checkbox] {
+  margin-right: 5px;
+}
+
+#filterForm button {
+  padding: 8px 15px;
+  background-color: var(--blue);
+  color: var(--white);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 10px; /* Spațiu suplimentar dacă butonul trece pe rândul următor */
+}
+
+/* Stiluri responsive pentru formularul de filtre */
+@media (max-width: 768px) {
+  #filterForm {
+    justify-content: center;
+  }
+}
+
+/* Stil pentru formularul de adăugare voluntar */
+.container form {
+  background-color: var(--white);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 5px;
+  max-width: 100% ; /* Asigură-te că formularul nu depășește lățimea containerului */
+  max-height: 80vh; /* Limitează înălțimea formularului */
+  overflow-y: auto; /* Permite derularea dacă conținutul este prea lung */
+}
+
+.container form input[type="text"],
+.container form input[type="date"],
+.container form input[type="email"] {
+  width: calc(100% - 20px); /* Ajustează lățimea pentru a lua în considerare padding-ul */
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid var(--black2);
+  border-radius: 5px;
+}
+
+.container form label {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--black1);
+  font-weight: bold;
+}
+
+.container form input[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  background-color: var(--blue);
+  color: var(--white);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.container form input[type="submit"]:hover {
+  background-color: darken(var(--blue), 10%);
+}
+
+
+
+/* ======================= Tabel ====================== */
+
+/* Stil pentru div-ul care înconjoară tabelul - adăugați acest nou stil */
+.table-container {
+  max-height: 300px; /* Ajustează înălțimea conform necesităților */
+  overflow-y: auto; /* Activează bara de derulare verticală */
+  margin-bottom: 5px; /* Spațiu sub tabel pentru separare */
+}
+
+.table-volunteers {
+  width: 100%;
+  max-width: 100%; /* Pentru a se potrivi cu container-ul */
+  margin: 0 auto; /* Centrarea tabelului */
+  border-collapse: collapse;
+}
+
+.table-volunteers td, .table-volunteers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+/* Stil actualizat pentru butonul din formularul de adăugare voluntar pentru a se potrivi cu stilul butonului de postare anunțuri */
+.form-add-volunteer button {
+  width: 100%; /* Se extinde pe toată lățimea container-ului său */
+  padding: 10px; /* Spațiu interior pentru a mări butonul */
+  background-color: var(--blue); /* Culoarea de fundal albastră definită în :root */
+  color: var(--white); /* Culoare text albă */
+  border: none; /* Fără bordură */
+  border-radius: 5px; /* Margini rotunjite */
+  cursor: pointer; /* Cursorul se schimbă în pointer când este deasupra butonului */
+  font-size: 16px; /* Dimensiunea fontului */
+  transition: background-color 0.3s ease; /* O tranziție pentru culoarea de fundal */
+}
+
+
+.form-add-volunteer input,
+.form-add-volunteer select,
+.form-add-volunteer textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.form-add-volunteer button {
+  width: 100%;
+  padding: 10px;
+  background-color: var(--blue);
+  color: var(--white);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* ======================= Tabel Anunțuri ====================== */
+
+/* Stil pentru div-ul care înconjoară tabelul anunțurilor */
+.table-container {
+  max-height: 400px; /* Ajustează înălțimea conform necesităților tale */
+  overflow-y: auto; /* Activează bara de derulare verticală dacă este necesar */
+  margin-bottom: 20px; /* Spațiu sub tabel pentru separare */
+  background-color: #fff; /* Fundal alb pentru container */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Umbra ușoară pentru estetică */
+}
+
+/* Stilizarea tabelului de anunțuri */
+.table-announcements {
+  width: 100%; /* Lățimea maximă pentru a se potrivi cu container-ul */
+  border-collapse: collapse; /* Înlătură spațiul dintre celule */
+  margin: 0 auto; /* Centrarea tabelului */
+}
+
+.table-announcements td, .table-announcements th {
+  border: 1px solid #ddd; /* Bordură subțire și discretă */
+  padding: 8px; /* Spațiu interior pentru text */
+  text-align: left; /* Aliniere text la stânga */
+}
+
+/* Stil pentru capul de tabel */
+.table-announcements th {
+  font-weight: bold; /* Textul îngroșat pentru capul de tabel */
+}
+
+/* Stil pentru butoanele de acțiune */
+.btn-edit {
+  padding: 5px;
+  background-color: #4CAF50; /* Culoare verde */
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.btn-delete {
+  padding: 5px;
+  background-color: #f44336; /* Culoare roșie */
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+/* ================== Order Details List ============== */
+.details {
+  position: relative;
+  width: 100%;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-gap: 30px;
+  margin-top: 5px;
+}
+
+.details .recentOrders {
+  position: relative;
+  display: grid;
+  min-height: 500px;
+  background: var(--white);
+  padding: 20px;
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+  border-radius: 20px;
+}
+
+.details .cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.cardHeader h2 {
+  font-weight: 600;
+  color: var(--blue);
+}
+.cardHeader .btn {
+  position: relative;
+  padding: 5px 10px;
+  background: var(--blue);
+  text-decoration: none;
+  color: var(--white);
+  border-radius: 6px;
+}
+
+.details table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 5px;
+}
+.details table thead td {
+  font-weight: 600;
+}
+.details .recentOrders table tr {
+  color: var(--black1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.details .recentOrders table tr:last-child {
+  border-bottom: none;
+}
+.details .recentOrders table tbody tr:hover {
+  background: var(--blue);
+  color: var(--white);
+}
+.details .recentOrders table tr td {
+  padding: 10px;
+}
+.details .recentOrders table tr td:last-child {
+  text-align: end;
+}
+.details .recentOrders table tr td:nth-child(2) {
+  text-align: end;
+}
+.details .recentOrders table tr td:nth-child(3) {
+  text-align: center;
+}
+.status.delivered {
+  padding: 2px 4px;
+  background: #8de02c;
+  color: var(--white);
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.status.pending {
+  padding: 2px 4px;
+  background: #e9b10a;
+  color: var(--white);
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.status.return {
+  padding: 2px 4px;
+  background: #f00;
+  color: var(--white);
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.status.inProgress {
+  padding: 2px 4px;
+  background: #1795ce;
+  color: var(--white);
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.recentCustomers {
+  position: relative;
+  display: grid;
+  min-height: 500px;
+  padding: 20px;
+  background: var(--white);
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+  border-radius: 20px;
+}
+.recentCustomers .imgBx {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+  overflow: hidden;
+}
+.recentCustomers .imgBx img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.recentCustomers table tr td {
+  padding: 12px 10px;
+}
+.recentCustomers table tr td h4 {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.2rem;
+}
+.recentCustomers table tr td h4 span {
+  font-size: 14px;
+  color: var(--black2);
+}
+.recentCustomers table tr:hover {
+  background: var(--blue);
+  color: var(--white);
+}
+.recentCustomers table tr:hover td h4 span {
+  color: var(--white);
+}
+
+/* ====================== Responsive Design ========================== */
+@media (max-width: 991px) {
+  .navigation {
+    left: -300px;
+  }
+  .navigation.active {
+    width: 300px;
+    left: 0;
+  }
+  .main {
+    width: 100%;
+    left: 0;
+  }
+  .main.active {
+    left: 300px;
+  }
+  .cardBox {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .details {
+    grid-template-columns: 1fr;
+  }
+  .recentOrders {
+    overflow-x: auto;
+  }
+  .status.inProgress {
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .cardBox {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .cardHeader h2 {
+    font-size: 20px;
+  }
+  .user {
+    min-width: 40px;
+  }
+  .navigation {
+    width: 100%;
+    left: -100%;
+    z-index: 1000;
+  }
+  .navigation.active {
+    width: 100%;
+    left: 0;
+  }
+  .toggle {
+    z-index: 10001;
+  }
+  .main.active .toggle {
+    color: #fff;
+    position: fixed;
+    right: 0;
+    left: initial;
+  }
+}
